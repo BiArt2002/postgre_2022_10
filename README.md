@@ -1,6 +1,7 @@
 # postgre_2022_10
 
 **2-я лекция**
+
 Создал ВМ с именем postgre-2022-10 в облаке Яндекса.
 Характеристики ВМ: платформа Intel Ice Lake, 2 vCPU, 50% vCPU, RAM 4 ГБ, HDD 15 ГБ, ОС Ubuntu 22.04 LTS.
 
@@ -152,15 +153,15 @@ Ver Cluster Port Status Owner    Data directory              Log file
 	iso=# \l
 	
 Вывод в консоли:
-                                                 List of databases
-   Name    |  Owner   | Encoding |   Collate   |    Ctype    | ICU Locale | Locale Provider |   Access privileges
------------+----------+----------+-------------+-------------+------------+-----------------+-----------------------
- iso       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |
- postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |
- template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            | =c/postgres          +
-           |          |          |             |             |            |                 | postgres=CTc/postgres
- template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            | =c/postgres          +
-           |          |          |             |             |            |                 | postgres=CTc/postgres
+                                                 	List of databases
+   	Name    |  Owner   | Encoding |   Collate   |    Ctype    | ICU Locale | Locale Provider |   Access privileges
+	-----------+----------+----------+-------------+-------------+------------+-----------------+-----------------------
+ 	iso       | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |
+ 	postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |
+ 	template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            | =c/postgres          +
+     	      |          |          |             |             |            |                 | postgres=CTc/postgres
+	 template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            | =c/postgres          +
+       	    |          |          |             |             |            |                 | postgres=CTc/postgres
 
 Выбрал текущую базу, командная строка: 
 
@@ -234,18 +235,7 @@ Ver Cluster Port Status Owner    Data directory              Log file
 
 	iso=# SELECT * FROM pg_stat_activity;
 	
-Вывод в консоли:
-
-
- |         backend_start         |          xact_start           |          query_start          |         state_change          | wait_event_type |     wait_event      | state  | backend_xid | backend_xmin | query_id |              query              |         backend_type
--------+---------+------+------------+----------+----------+------------------+-------------+-----------------+-------------+-------------------------------+-------------------------------+-------------------------------+-------------------------------+-----------------+---------------------+--------+-------------+--------------+----------+---------------------------------+------------------------------
-       |         |  777 |            |          |          |                  |             |                 |             | 2022-10-26 19:59:41.060836+00 |                               |                               |                               | Activity        | AutoVacuumMain      |        |             |              |          |                                 | autovacuum launcher
-       |         |  779 |            |       10 | postgres |                  |             |                 |             | 2022-10-26 19:59:41.061715+00 |                               |                               |                               | Activity        | LogicalLauncherMain |        |             |              |          |                                 | logical replication launcher
- 16384 | iso     | 1091 |            |       10 | postgres | psql             |             |                 |          -1 | 2022-10-26 20:04:41.127842+00 | 2022-10-26 20:39:03.289023+00 | 2022-10-26 20:39:03.289023+00 | 2022-10-26 20:39:03.289026+00 |                 |                     | active |             |          739 |          | SELECT * FROM pg_stat_activity; | client backend
-       |         |  775 |            |          |          |                  |             |                 |             | 2022-10-26 19:59:41.063627+00 |                               |                               |                               | Activity        | BgWriterMain        |        |             |              |          |                                 | background writer
-       |         |  774 |            |          |          |                  |             |                 |             | 2022-10-26 19:59:41.064657+00 |                               |                               |                               | Activity        | CheckpointerMain    |        |             |              |          |                                 | checkpointer
-       |         |  776 |            |          |          |                  |             |                 |             | 2022-10-26 19:59:41.063239+00 |                               |                               |                               | Activity        | WalWriterMain       |        |             |              |          |                                 | walwriter
-(6 rows)
+Вывод в консоли был очень большой, не записываю.
 
 Стал тестировать в 1-й консоли TRANSACTION ISOLATION LEVEL READ COMMITTED, командная строка:
 
@@ -256,7 +246,7 @@ Ver Cluster Port Status Owner    Data directory              Log file
 Вывод в консоли:		
 
 	i | amount
-   ---+--------
+	---+--------
 	1 |    100
 	2 |    500
 
@@ -272,7 +262,7 @@ Ver Cluster Port Status Owner    Data directory              Log file
 Вывод во 2-й консоли для селекта после апдейта:
 
 	i | amount
-   ---+--------
+	---+--------
 	2 |    500
 	1 |    555
 	
@@ -296,16 +286,16 @@ Ver Cluster Port Status Owner    Data directory              Log file
 Вывод в консоли:
 
 	i  | amount
-  -----+--------
-     2 |    500
-     1 |    555
-   777 |
-  (3 rows)
+	-----+--------
+	2 |    500
+	1 |    555
+	777 |
+	(3 rows)
   
 Но в 1-й консоли селект дает прежние данные, т.к. уровень изоляции REPEATABLE READ.
 
 	i | amount
-   ---+--------
+	---+--------
 	2 |    500
 	1 |    555
 
