@@ -22,8 +22,8 @@
 	
 Вывод в консоли:
 
-Ver Cluster Port Status Owner    Data directory              Log file
-14  main    5432 online postgres /var/lib/postgresql/14/main /var/log/postgresql/postgresql-14-main.log
+	Ver Cluster Port Status Owner    Data directory              Log file
+	14  main    5432 online postgres /var/lib/postgresql/14/main /var/log/postgresql/postgresql-14-main.log
 
 Дополнительно поставил PostgreSQL 15, командная строка:
 
