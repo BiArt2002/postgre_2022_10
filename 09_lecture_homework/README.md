@@ -125,6 +125,8 @@ C помощью pgbench подавал нагрузку - затем понял
 Вообще, выполнение по времени контрольной точки связано еще с параметром checkpoint_completion_target.
 Проверил параметр checkpoint_completion_target. Командная строка:
 
+	postgres=# show checkpoint_completion_target;
+
 Вывод в консоль:
 
 	 checkpoint_completion_target
@@ -267,7 +269,7 @@ Tps в синхронном/асинхронном режиме существе
 	  4 | d4
 	(4 rows)	
 	
-Нащел, где расположен файл таблицы tbl_test. Командная строка:
+Нашел, где расположен файл таблицы tbl_test. Командная строка:
 
 	db_test=# select pg_relation_filepath('tbl_test');
 
